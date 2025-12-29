@@ -22,7 +22,11 @@ Built with simplicity, performance, and maintainability in mind.
 
 ## ✨ Demo
 
-![Front Toast Demo](./assets/front-toast-demo.gif)
+Run the demo: 
+
+```bash
+npm run demo
+```
 
 > The demo showcases multiple toasts, custom content, themes, and automatic dismissal.
 

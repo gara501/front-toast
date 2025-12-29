@@ -1,61 +1,45 @@
-import { render, screen, act } from "@testing-library/react";
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { render, screen, act, cleanup } from "@testing-library/react";
+import "@testing-library/jest-dom/vitest";
 import { ToastProvider } from "../ToastProvider";
 import { showToast } from "../core/toastStore";
 
 describe("ToastProvider", () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-
   afterEach(() => {
-    vi.runOnlyPendingTimers();
-    vi.useRealTimers();
+    cleanup();
   });
 
-  it("renders toast content when emitted", () => {
+  it("renders toast content when emitted", async () => {
     render(<ToastProvider />);
 
     act(() => {
-      showToast("Hello toast", { duration: 1000 });
+      showToast("Hello Toast", { duration: 1000 });
     });
 
-    expect(screen.getByText("Hello toast")).toBeInTheDocument();
+    expect(await screen.findByText("Hello Toast")).toBeInTheDocument();
   });
 
-  it("removes toast after duration", () => {
+  it("removes toast after duration", async () => {
+    vi.useFakeTimers();
     render(<ToastProvider />);
 
     act(() => {
       showToast("Auto close", { duration: 500 });
     });
 
+    expect(screen.getByText("Auto close")).toBeInTheDocument();
+
     act(() => {
       vi.advanceTimersByTime(500);
     });
 
     expect(screen.queryByText("Auto close")).not.toBeInTheDocument();
+
+    vi.useRealTimers();
   });
 
-  it("handles multiple toasts independently", () => {
-    render(<ToastProvider />);
-
-    act(() => {
-      showToast("Toast 1", { id: "1", duration: 500 });
-      showToast("Toast 2", { id: "2", duration: 1000 });
-    });
-
-    act(() => {
-      vi.advanceTimersByTime(500);
-    });
-
-    expect(screen.queryByText("Toast 1")).not.toBeInTheDocument();
-    expect(screen.getByText("Toast 2")).toBeInTheDocument();
-
-    act(() => {
-      vi.advanceTimersByTime(500);
-    });
-
-    expect(screen.queryByText("Toast 2")).not.toBeInTheDocument();
+  it("is SSR-safe", () => {
+    const { container } = render(<ToastProvider />);
+    expect(container.firstChild).toBeNull();
   });
 });

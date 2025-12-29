@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { EventBus } from "./eventBus";
+import { EventBus } from "../../core/eventBus";
 
 describe("EventBus", () => {
   it("notifies a single listener", () => {
