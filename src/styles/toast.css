@@ -1,41 +1,93 @@
+/* Toast container positioning */
 .rtk-toast-root {
     position: fixed;
     top: 1rem;
     right: 1rem;
-    z-index: 9999;
+    z-index: 10000;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    pointer-events: none; /* Allows clicks through when no toast */
 }
 
+/* Individual toast */
 .rtk-toast {
-    min-width: 240px;
-    padding: 12px 16px;
-    border-radius: 6px;
-    font-family: system-ui, sans-serif;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    animation: rtk-fade-in 0.2s ease-out;
+    min-width: 260px;
+    max-width: 380px;
+    padding: 0.9rem 1.2rem;
+    border-radius: 0.75rem;
+    font-family: "Funnel Display", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #fff;
+    background: #323232;
+    box-shadow:
+        0px 12px 28px rgba(0, 0, 0, 0.12),
+        0px 4px 8px rgba(0, 0, 0, 0.06);
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-left: 4px solid transparent;
+    animation: toast-slide-in 0.35s ease-out;
 }
 
+/* Theme variants */
 .rtk-light {
     background: #ffffff;
     color: #111;
+    border-left-color: #3b82f6;
 }
 
 .rtk-dark {
     background: #1f2937;
     color: #f9fafb;
+    border-left-color: #6366f1;
 }
 
-/* custom theme left for consumer */
+.rtk-success {
+    background: #059669;
+    border-left-color: #10b981;
+}
 
-@keyframes rtk-fade-in {
+.rtk-error {
+    background: #b91c1c;
+    border-left-color: #ef4444;
+}
+
+.rtk-warning {
+    background: #b45309;
+    border-left-color: #f59e0b;
+}
+
+/* Slide-in animation */
+@keyframes toast-slide-in {
     from {
         opacity: 0;
-        transform: translateY(-6px);
+        transform: translateX(14px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
+    }
+}
+
+/* Optional toast progress bar */
+.rtk-toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    animation: progress-shrink var(--toast-duration, 4s) linear forwards;
+}
+
+@keyframes progress-shrink {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
     }
 }
