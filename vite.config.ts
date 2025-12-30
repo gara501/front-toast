@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   build: {
@@ -12,5 +13,6 @@ export default defineConfig({
       external: ["react", "react-dom"],
     },
   },
-  plugins: [dts()],
+  plugins: [dts(), react()],
+  base: "/front-toast/",
 });
