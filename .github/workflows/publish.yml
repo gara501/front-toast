@@ -49,8 +49,10 @@ jobs:
         working-directory: demo
         run: npm run build
 
-      - name: Remove legacy tokens
+      - name: Hard-disable legacy npm auth
         run: |
+          rm -f ~/.npmrc
+          npm config delete //registry.npmjs.org/:_authToken || true
           unset NODE_AUTH_TOKEN
           unset NPM_TOKEN
 
