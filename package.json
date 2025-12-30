@@ -4,6 +4,9 @@
   "description": "A lightweight, framework-safe toast notification system for React.",
   "private": false,
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
