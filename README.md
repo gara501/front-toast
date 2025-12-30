@@ -130,13 +130,28 @@ toast.show({
 front-toast uses pure CSS with scoped class names:
 
 ```css
-.front-toast--success {
+.rtk-success {
   background-color: #16a34a;
   color: white;
 }
 ```
 
-No global selectors. No resets. No conflicts.
+### Custom Themes
+
+You can define your own themes using pure CSS.
+
+```css
+.rtk-neon {
+  background: linear-gradient(135deg, #22d3ee, #a855f7);
+  color: #0f172a;
+}
+```
+Now in your component, only need to add the theme name (without rtk), rtk should be always in your css definition, this is to avoid
+name collisions
+
+```bash
+showToast("Branded toast", { theme: "neon" });
+```
 
 ---
 

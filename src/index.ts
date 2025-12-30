@@ -1,2 +1,3 @@
-export { ToastProvider } from "./ToastProvider";
-export { showToast as toast } from "./core/toastStore";
+export * from "./ToastProvider";
+export * from "./core/toastStore";
+export * from "./types/toast";
