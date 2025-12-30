@@ -28,7 +28,14 @@ Run the demo:
 npm run demo
 ```
 
+build the demo (no needed to run locally):
+```bash
+npm run build:demo
+```
+
 > The demo showcases multiple toasts, custom content, themes, and automatic dismissal.
+
+To access the demo go to: [demo](https://gara501.github.io/front-toast/)
 
 ---
 
