@@ -1,6 +1,6 @@
 {
   "name": "front-toast",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A lightweight, framework-safe toast notification system for React.",
   "private": false,
   "type": "module",
