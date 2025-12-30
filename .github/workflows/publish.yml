@@ -19,9 +19,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/
 
-      - run: npm whoami || echo "Using Trusted Publishing"
       - run: npm ci
       - run: npm run build
       - run: npm publish --provenance --access public
@@ -43,11 +41,18 @@ jobs:
         with:
           node-version: 20
 
+      - run: npm whoami || echo "Using Trusted Publishing"
+      - run: npm config list
       - run: npm ci
 
       - name: Build demo
         working-directory: demo
         run: npm run build
+
+      - name: Remove legacy tokens
+        run: |
+          unset NODE_AUTH_TOKEN
+          unset NPM_TOKEN
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
